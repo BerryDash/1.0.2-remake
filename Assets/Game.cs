@@ -5,7 +5,7 @@ public class Game : MonoBehaviour
 {
     public float spawnRate = 1f;
     private float nextSpawnTime;
-    private bool gameRunning = true;
+    private readonly bool gameRunning = true;
     private int score;
     private float boostLeft;
     public float screenWidth;
@@ -13,12 +13,12 @@ public class Game : MonoBehaviour
     private void Start()
     {
         screenWidth = Camera.main.orthographicSize * 2f * Camera.main.aspect;
-        GameObject gameObject = new GameObject("Berry");
-        GameObject obj = new GameObject("Bird");
+        GameObject gameObject = new("Berry");
+        GameObject obj = new("Bird");
         Resources.Load<AudioClip>("death");
         Resources.Load<AudioClip>("eat");
-        GameObject gameObject2 = new GameObject("PoisionBerry");
-        GameObject gameObject3 = new GameObject("UltraBerry");
+        GameObject gameObject2 = new("PoisionBerry");
+        GameObject gameObject3 = new("UltraBerry");
         gameObject.AddComponent<SpriteRenderer>();
         obj.AddComponent<SpriteRenderer>();
         obj.AddComponent<Rigidbody2D>();
@@ -29,7 +29,7 @@ public class Game : MonoBehaviour
         obj.transform.position = new Vector3(0f, -4.5f, 0f);
         obj.transform.localScale = new Vector3(1.35f, 1.35f, 1.35f);
         obj.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("bird");
-        GameObject obj2 = new GameObject("ScoreText");
+        GameObject obj2 = new("ScoreText");
         obj2.AddComponent<TextMesh>();
         obj2.GetComponent<TextMesh>().text = "Score: 0";
         obj2.GetComponent<TextMesh>().characterSize = 0.1f;
@@ -37,7 +37,7 @@ public class Game : MonoBehaviour
         obj2.GetComponent<TextMesh>().color = Color.white;
         obj2.GetComponent<TextMesh>().anchor = TextAnchor.MiddleCenter;
         obj2.transform.position = new Vector3(0f, 4f, 0f);
-        GameObject obj3 = new GameObject("BoostText");
+        GameObject obj3 = new("BoostText");
         obj3.AddComponent<TextMesh>();
         obj3.GetComponent<TextMesh>().text = "";
         obj3.GetComponent<TextMesh>().characterSize = 0.1f;
@@ -47,7 +47,7 @@ public class Game : MonoBehaviour
         obj3.transform.position = new Vector3(0f, 3f, 0f);
         if (Application.platform == RuntimePlatform.WindowsPlayer || Application.platform == RuntimePlatform.LinuxPlayer || Application.platform == RuntimePlatform.OSXPlayer)
         {
-            DiscordRpcClient discordRpcClient = new DiscordRpcClient("1216934858182361148");
+            DiscordRpcClient discordRpcClient = new("1216934858182361148");
             discordRpcClient.Initialize();
             discordRpcClient.SetPresence(new RichPresence
             {
@@ -65,9 +65,9 @@ public class Game : MonoBehaviour
         }
         if (Application.isMobilePlatform)
         {
-            GameObject gameObject4 = new GameObject("LeftArrow");
-            GameObject gameObject5 = new GameObject("RightArrow");
-            GameObject obj4 = new GameObject("RestartButton");
+            GameObject gameObject4 = new("LeftArrow");
+            GameObject gameObject5 = new("RightArrow");
+            GameObject obj4 = new("RestartButton");
             gameObject4.AddComponent<SpriteRenderer>();
             gameObject5.AddComponent<SpriteRenderer>();
             obj4.AddComponent<SpriteRenderer>();
@@ -95,7 +95,7 @@ public class Game : MonoBehaviour
         float num2 = 0.18f;
         if (boostLeft > 0f)
         {
-            num2 = 0.25f + 0.002f * (float)(int)boostLeft;
+            num2 = 0.25f + 0.002f * (int)boostLeft;
         }
         if (!Application.isMobilePlatform)
         {
